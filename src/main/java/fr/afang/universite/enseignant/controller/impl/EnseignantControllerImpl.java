@@ -17,7 +17,7 @@ import fr.afang.universite.enseignant.domain.Enseignant;
 @Controller
 public class EnseignantControllerImpl implements IEnseignantController {
 
-	private final String ENSEIGNANT = "enseignant";
+	public final String ENSEIGNANT = "enseignant";
 	@Autowired
 	private IEnseignantBusiness enseignantBusiness;
 
