@@ -2,6 +2,8 @@ package fr.afang.universite.enseignant.business.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import fr.afang.universite.enseignant.repository.IEnseignantRepository;
 public class EnseignantBusinessImpl implements IEnseignantBusiness {
 	@Autowired
 	private IEnseignantRepository enseignantRepository;
+	private static Logger LOGGER = LoggerFactory.getLogger(EnseignantBusinessImpl.class);
 
 	@Override
 	public List<Enseignant> getListeEnseignants() {
@@ -36,7 +39,7 @@ public class EnseignantBusinessImpl implements IEnseignantBusiness {
 	public void supprimerEnseignant(Integer id) {
 		enseignantRepository.deleteById(id);
 
-		System.out.println("L'Enseignant est deleted !!!");
+		LOGGER.info("L'Enseignant est deleted !!!");
 	}
 
 }

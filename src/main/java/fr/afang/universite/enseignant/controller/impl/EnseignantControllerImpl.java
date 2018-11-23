@@ -1,6 +1,5 @@
 package fr.afang.universite.enseignant.controller.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +16,11 @@ import fr.afang.universite.enseignant.domain.Enseignant;
 
 @Controller
 public class EnseignantControllerImpl implements IEnseignantController {
-	
-	
+
+	private final static String ENSEIGNANT = "enseignant";
 	@Autowired
 	private IEnseignantBusiness enseignantBusiness;
-	
-	
+
 	@Override
 	@RequestMapping("/enseignants")
 	public String getEnseignant(Model model) {
@@ -30,43 +28,40 @@ public class EnseignantControllerImpl implements IEnseignantController {
 		model.addAttribute("liste", listeEn);
 		return "enseignant";
 
-}
-
+	}
 
 	@Override
 	@RequestMapping("/enseignant")
 	public String getEnseignantById(Model model, @RequestParam Integer id) {
 		Enseignant listeEn = enseignantBusiness.getEnseignantById(id);
-		model.addAttribute("enseignant", listeEn);
-		
-		return"enseignantDetail";
-	}
+		model.addAttribute(ENSEIGNANT, listeEn);
 
+		return "enseignantDetail";
+	}
 
 	@Override
 	@RequestMapping("/ajout-enseignant")
 	public String ajoutEnseignant(Model model) {
 		Enseignant e = new Enseignant();
-		model.addAttribute("enseignant", e);
+		model.addAttribute(ENSEIGNANT, e);
 		return "ajoutEnseignant";
-		
+
 	}
-	
+
 	@Override
 	@PostMapping("/ajouter-enseignant")
-	public String ajouterEnseignant(Model model, @ModelAttribute Enseignant enseignant) {	
-		enseignantBusiness.saveEnseignant(enseignant);		
-		return"redirect:/enseignants";
+	public String ajouterEnseignant(Model model, @ModelAttribute Enseignant enseignant) {
+		enseignantBusiness.saveEnseignant(enseignant);
+		return "redirect:/enseignants";
 	}
-  
+
 	@Override
 	@RequestMapping("/supprimerenseignant")
 	public String supprimerEnseignantById(Model model, @RequestParam Integer id) {
 		enseignantBusiness.supprimerEnseignant(id);
-		return"redirect:/enseignants";
-		
-	}
+		return "redirect:/enseignants";
 
+	}
 
 	@Override
 	public String supprimerEnseignant(Model model, Enseignant enseignant) {
