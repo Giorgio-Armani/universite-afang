@@ -15,7 +15,7 @@ import fr.afang.universite.enseignant.repository.IEnseignantRepository;
 public class EnseignantBusinessImpl implements IEnseignantBusiness {
 	@Autowired
 	private IEnseignantRepository enseignantRepository;
-	private static Logger LOGGER = LoggerFactory.getLogger(EnseignantBusinessImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(EnseignantBusinessImpl.class);
 
 	@Override
 	public List<Enseignant> getListeEnseignants() {
@@ -39,7 +39,7 @@ public class EnseignantBusinessImpl implements IEnseignantBusiness {
 	public void supprimerEnseignant(Integer id) {
 		enseignantRepository.deleteById(id);
 
-		LOGGER.info("L'Enseignant est deleted !!!");
+		logger.info("L'Enseignant est deleted !!!");
 	}
 
 }
